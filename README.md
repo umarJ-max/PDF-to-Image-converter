@@ -1,79 +1,98 @@
-# PDF to Image Converter
+# 📄 PDF to Image Converter
 
-A complete PDF to image conversion tool with both web interface and command-line support. Converts PDF files to PNG, JPEG, TIFF, or BMP formats.
+> **Professional PDF to Image Conversion Tool** - Convert PDF documents to high-quality PNG/JPEG images with ease.
 
-## Features
-- Web interface for easy drag-and-drop conversion
-- Command-line interface for batch processing
-- Multiple output formats (PNG, JPEG, TIFF, BMP)
-- Customizable DPI settings
-- Batch download as ZIP file (web interface)
+[![Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com)
+[![Python](https://img.shields.io/badge/Python-3.8+-blue?style=for-the-badge&logo=python)](https://python.org)
+[![Flask](https://img.shields.io/badge/Flask-2.0+-green?style=for-the-badge&logo=flask)](https://flask.palletsprojects.com)
 
-## Quick Start
+## ✨ Features
 
-### Windows Users:
-1. Run `install.bat` to install dependencies
-2. For web interface: `python run.py web`
-3. For command line: `python run.py cli your_file.pdf`
+- 🖼️ **High-Quality Conversion** - Convert PDF pages to PNG/JPEG with customizable DPI (72-300)
+- 👀 **Live Preview** - See all pages before downloading
+- 📱 **Mobile Responsive** - Works perfectly on desktop, tablet, and mobile
+- ⚡ **Individual Downloads** - Download specific pages you need
+- 📦 **Batch Download** - Get all pages in a single ZIP file
+- 🔒 **Secure Processing** - Files processed temporarily and automatically deleted
+- 🎨 **Modern UI** - Clean, professional interface with smooth animations
 
-### Manual Installation:
-1. Install Python dependencies:
+## 🚀 Live Demo
+
+[**Try it now →**](your-vercel-url-here)
+
+## 🛠️ Tech Stack
+
+- **Backend**: Python, Flask
+- **PDF Processing**: PyMuPDF (fitz)
+- **Image Processing**: Pillow (PIL)
+- **Frontend**: HTML5, CSS3, JavaScript
+- **Deployment**: Vercel
+- **Styling**: Modern CSS with gradients and animations
+
+## 📋 How to Use
+
+1. **Upload** - Select or drag & drop your PDF file
+2. **Configure** - Choose output format (PNG/JPEG) and DPI quality
+3. **Convert** - Click convert and wait for processing
+4. **Preview** - View all converted pages
+5. **Download** - Get individual pages or all as ZIP
+
+## 🏃‍♂️ Quick Start
+
+### Local Development
+
 ```bash
+# Clone the repository
+git clone <your-repo-url>
+cd PDF-To-Image-Converter
+
+# Install dependencies
 pip install -r requirements.txt
+
+# Run locally
+python app.py
 ```
 
-2. Install poppler (required for pdf2image):
-   - **Windows**: Download from https://github.com/oschwartz10612/poppler-windows/releases/
-   - **macOS**: `brew install poppler`
-   - **Linux**: `sudo apt-get install poppler-utils`
+### Deploy to Vercel
 
-## Usage
+1. Fork this repository
+2. Connect to Vercel
+3. Deploy automatically
 
-### Web Interface
-```bash
-python run.py web
-# or directly: python app.py
+## 📁 Project Structure
+
 ```
-Then open http://localhost:5000 in your browser.
-
-### Command Line Interface
-
-#### Basic usage (PNG format):
-```bash
-python run.py cli document.pdf
-# or directly: python pdf_converter.py document.pdf
+PDF-To-Image-Converter/
+├── app.py              # Main Flask application
+├── api/
+│   └── index.py        # Vercel entry point
+├── requirements.txt    # Python dependencies
+├── vercel.json        # Vercel configuration
+├── .vercelignore      # Files to ignore during deployment
+└── README.md          # This file
 ```
 
-#### Specify output format:
-```bash
-python run.py cli document.pdf -f JPEG
-python run.py cli document.pdf -f TIFF
-```
+## ⚙️ Configuration
 
-#### Specify output directory:
-```bash
-python run.py cli document.pdf -o output_folder
-```
+- **Max File Size**: 16MB
+- **Supported Formats**: PDF input, PNG/JPEG output
+- **DPI Range**: 72-300 DPI
+- **Session Storage**: Temporary (auto-cleanup)
 
-#### Custom DPI:
-```bash
-python run.py cli document.pdf -d 300
-```
+## 🤝 Contributing
 
-## Supported Formats
-- PNG (default)
-- JPEG/JPG
-- TIFF
-- BMP
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-## Examples
-```bash
-# Convert to PNG (default)
-python pdf_converter.py sample.pdf
+## 📄 License
 
-# Convert to JPEG with custom output directory
-python pdf_converter.py sample.pdf -f JPEG -o images/
+This project is open source and available under the [MIT License](LICENSE).
 
-# High quality conversion
-python pdf_converter.py sample.pdf -f PNG -d 300
-```
+## 👨‍💻 Author
+
+**Umar J**
+- Professional PDF Solutions Developer
+- Focused on creating efficient, user-friendly web applications
+
+---
+
+⭐ **Star this repo if you found it helpful!**

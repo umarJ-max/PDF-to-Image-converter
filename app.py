@@ -168,6 +168,10 @@ HTML_TEMPLATE = '''
         }
     </script>
         </div>
+        <div class="about-section" style="background: rgba(255,255,255,0.1); border-radius: 15px; padding: 20px; margin: 20px 0; color: white; text-align: center;">
+            <h3 style="margin-bottom: 10px;">About This Tool</h3>
+            <p style="font-size: 0.9rem; line-height: 1.5; opacity: 0.9;">Convert PDF documents to high-quality images instantly. Preview all pages before downloading individual images or get them all in a ZIP file. Built with modern web technologies for fast, secure, and reliable conversion.</p>
+        </div>
         <div class="footer">
             <p>&copy; 2024 Umar J - Professional PDF Solutions</p>
         </div>
