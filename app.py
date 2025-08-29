@@ -17,31 +17,51 @@ HTML_TEMPLATE = '''
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PDF to Image Converter - Umar J</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 15px; }
         .header { text-align: center; color: white; margin-bottom: 30px; }
-        .header h1 { font-size: 2.5rem; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
-        .brand { font-size: 1.2rem; opacity: 0.9; font-weight: 300; }
-        .main-card { background: white; border-radius: 20px; padding: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
-        .upload-area { border: 3px dashed #667eea; padding: 50px; text-align: center; margin: 30px 0; border-radius: 15px; background: #f8f9ff; transition: all 0.3s ease; }
+        .header h1 { font-size: clamp(1.8rem, 5vw, 2.5rem); margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        .brand { font-size: clamp(1rem, 3vw, 1.2rem); opacity: 0.9; font-weight: 300; }
+        .main-card { background: white; border-radius: 20px; padding: clamp(20px, 4vw, 30px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .upload-area { border: 3px dashed #667eea; padding: clamp(30px, 8vw, 50px); text-align: center; margin: 20px 0; border-radius: 15px; background: #f8f9ff; transition: all 0.3s ease; }
         .upload-area:hover { border-color: #764ba2; background: #f0f2ff; }
-        .form-controls { display: flex; gap: 20px; justify-content: center; align-items: center; margin: 20px 0; flex-wrap: wrap; }
-        .form-controls label { font-weight: 600; color: #333; }
-        .form-controls select, .form-controls input { padding: 8px 12px; border: 2px solid #e1e5e9; border-radius: 8px; font-size: 14px; }
+        .upload-area input[type="file"] { width: 100%; max-width: 300px; }
+        .form-controls { display: flex; gap: 15px; justify-content: center; align-items: center; margin: 20px 0; flex-wrap: wrap; }
+        .form-controls label { font-weight: 600; color: #333; display: flex; flex-direction: column; align-items: center; gap: 5px; }
+        .form-controls select, .form-controls input { padding: 10px 12px; border: 2px solid #e1e5e9; border-radius: 8px; font-size: 16px; min-width: 80px; }
         .form-controls select:focus, .form-controls input:focus { outline: none; border-color: #667eea; }
-        button { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 12px 25px; border: none; border-radius: 25px; cursor: pointer; margin: 5px; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); }
+        button { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 12px 25px; border: none; border-radius: 25px; cursor: pointer; margin: 5px; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); font-size: 16px; min-height: 44px; }
         button:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6); }
         .progress { display: none; text-align: center; margin: 20px 0; color: #667eea; font-weight: 600; }
-        .pages-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; margin: 30px 0; }
-        .page-item { background: white; border: 1px solid #e1e5e9; padding: 20px; border-radius: 15px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.08); transition: all 0.3s ease; }
+        .pages-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; margin: 30px 0; }
+        .page-item { background: white; border: 1px solid #e1e5e9; padding: 15px; border-radius: 15px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.08); transition: all 0.3s ease; }
         .page-item:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
         .page-item h3 { color: #333; margin-bottom: 15px; font-size: 1.1rem; }
         .page-preview { max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 3px 10px rgba(0,0,0,0.1); }
         .download-all { text-align: center; margin: 30px 0; }
-        .footer { text-align: center; color: white; margin-top: 40px; opacity: 0.8; }
+        .footer { text-align: center; color: white; margin-top: 40px; opacity: 0.8; font-size: clamp(0.9rem, 2.5vw, 1rem); }
+        
+        @media (max-width: 768px) {
+            .container { padding: 10px; }
+            .main-card { border-radius: 15px; }
+            .form-controls { flex-direction: column; gap: 15px; }
+            .form-controls label { width: 100%; max-width: 200px; }
+            .pages-grid { grid-template-columns: 1fr; gap: 15px; }
+            .upload-area { margin: 15px 0; }
+            button { width: 100%; max-width: 300px; }
+        }
+        
+        @media (max-width: 480px) {
+            .header h1 { font-size: 1.8rem; }
+            .brand { font-size: 1rem; }
+            .main-card { padding: 15px; }
+            .page-item { padding: 10px; }
+        }
     </style>
 </head>
 <body>
@@ -54,7 +74,8 @@ HTML_TEMPLATE = '''
     <form id="uploadForm" enctype="multipart/form-data">
         <div class="upload-area" id="uploadArea">
             <input type="file" id="pdfFile" name="pdf" accept=".pdf" required>
-            <p>Choose PDF file or drag and drop here</p>
+            <p>📄 Choose PDF file or drag and drop here</p>
+            <small style="color: #666; margin-top: 10px; display: block;">Max file size: 16MB</small>
         </div>
         <div class="form-controls">
             <label>Format: 
