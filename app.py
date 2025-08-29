@@ -2,9 +2,10 @@ from flask import Flask, request, send_file, render_template_string, jsonify
 import os
 import tempfile
 import zipfile
-from pdf2image import convert_from_path
+import fitz  # PyMuPDF
+from PIL import Image
 from werkzeug.utils import secure_filename
-import shutil
+import io
 
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max file size
@@ -113,18 +114,29 @@ def convert_pdf():
         file.save(pdf_path)
         
         try:
-            # Convert PDF to images
-            pages = convert_from_path(pdf_path, dpi=dpi)
+            # Convert PDF to images using PyMuPDF
+            pdf_doc = fitz.open(pdf_path)
             
             # Create zip file with converted images
             zip_path = os.path.join(temp_dir, 'converted_images.zip')
             with zipfile.ZipFile(zip_path, 'w') as zip_file:
-                for i, page in enumerate(pages, 1):
-                    img_filename = f"page_{i:03d}.{format_type.lower()}"
+                for page_num in range(pdf_doc.page_count):
+                    page = pdf_doc[page_num]
+                    # Render page to image with specified DPI
+                    mat = fitz.Matrix(dpi/72, dpi/72)
+                    pix = page.get_pixmap(matrix=mat)
+                    
+                    # Convert to PIL Image
+                    img_data = pix.tobytes("ppm")
+                    img = Image.open(io.BytesIO(img_data))
+                    
+                    # Save image
+                    img_filename = f"page_{page_num+1:03d}.{format_type.lower()}"
                     img_path = os.path.join(temp_dir, img_filename)
-                    page.save(img_path, format_type)
+                    img.save(img_path, format_type)
                     zip_file.write(img_path, img_filename)
             
+            pdf_doc.close()
             return send_file(zip_path, as_attachment=True, download_name='converted_images.zip')
             
         except Exception as e:
