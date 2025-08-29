@@ -17,27 +17,46 @@ HTML_TEMPLATE = '''
 <!DOCTYPE html>
 <html>
 <head>
-    <title>PDF to Image Converter</title>
+    <title>PDF to Image Converter - Umar J</title>
     <style>
-        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
-        .upload-area { border: 2px dashed #ccc; padding: 40px; text-align: center; margin: 20px 0; }
-        button { background: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; margin: 5px; }
-        button:hover { background: #0056b3; }
-        .progress { display: none; margin: 20px 0; }
-        .pages-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; margin: 20px 0; }
-        .page-item { border: 1px solid #ddd; padding: 15px; border-radius: 8px; text-align: center; }
-        .page-preview { max-width: 100%; height: auto; border: 1px solid #ccc; }
-        .download-all { text-align: center; margin: 20px 0; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .header { text-align: center; color: white; margin-bottom: 30px; }
+        .header h1 { font-size: 2.5rem; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        .brand { font-size: 1.2rem; opacity: 0.9; font-weight: 300; }
+        .main-card { background: white; border-radius: 20px; padding: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .upload-area { border: 3px dashed #667eea; padding: 50px; text-align: center; margin: 30px 0; border-radius: 15px; background: #f8f9ff; transition: all 0.3s ease; }
+        .upload-area:hover { border-color: #764ba2; background: #f0f2ff; }
+        .form-controls { display: flex; gap: 20px; justify-content: center; align-items: center; margin: 20px 0; flex-wrap: wrap; }
+        .form-controls label { font-weight: 600; color: #333; }
+        .form-controls select, .form-controls input { padding: 8px 12px; border: 2px solid #e1e5e9; border-radius: 8px; font-size: 14px; }
+        .form-controls select:focus, .form-controls input:focus { outline: none; border-color: #667eea; }
+        button { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 12px 25px; border: none; border-radius: 25px; cursor: pointer; margin: 5px; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); }
+        button:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6); }
+        .progress { display: none; text-align: center; margin: 20px 0; color: #667eea; font-weight: 600; }
+        .pages-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; margin: 30px 0; }
+        .page-item { background: white; border: 1px solid #e1e5e9; padding: 20px; border-radius: 15px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.08); transition: all 0.3s ease; }
+        .page-item:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
+        .page-item h3 { color: #333; margin-bottom: 15px; font-size: 1.1rem; }
+        .page-preview { max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 3px 10px rgba(0,0,0,0.1); }
+        .download-all { text-align: center; margin: 30px 0; }
+        .footer { text-align: center; color: white; margin-top: 40px; opacity: 0.8; }
     </style>
 </head>
 <body>
-    <h1>PDF to Image Converter</h1>
+    <div class="container">
+        <div class="header">
+            <h1>PDF to Image Converter</h1>
+            <div class="brand">Powered by Umar J</div>
+        </div>
+        <div class="main-card">
     <form id="uploadForm" enctype="multipart/form-data">
         <div class="upload-area" id="uploadArea">
             <input type="file" id="pdfFile" name="pdf" accept=".pdf" required>
             <p>Choose PDF file or drag and drop here</p>
         </div>
-        <div>
+        <div class="form-controls">
             <label>Format: 
                 <select name="format" id="format">
                     <option value="PNG">PNG</option>
@@ -127,6 +146,11 @@ HTML_TEMPLATE = '''
             a.click();
         }
     </script>
+        </div>
+        <div class="footer">
+            <p>&copy; 2024 Umar J - Professional PDF Solutions</p>
+        </div>
+    </div>
 </body>
 </html>
 '''
