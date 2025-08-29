@@ -39,13 +39,13 @@ HTML_TEMPLATE = '''
         </div>
         <div>
             <label>Format: 
-                <select name="format">
+                <select name="format" id="format">
                     <option value="PNG">PNG</option>
                     <option value="JPEG">JPEG</option>
                 </select>
             </label>
             <label>DPI: 
-                <input type="number" name="dpi" value="200" min="72" max="300">
+                <input type="number" name="dpi" id="dpi" value="200" min="72" max="300">
             </label>
         </div>
         <button type="submit">Convert PDF</button>
